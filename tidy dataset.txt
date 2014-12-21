@@ -1,0 +1,13 @@
+row = 1 
+for (s in 1:numSubjects) {
+	for (a in 1:numActivities) {
+		result[row, 1] = uniqueSubjects[s]
+		result[row, 2] = activities[a, 2]
+		tmp <- cleaned[cleaned$subject==s & cleaned$activity==activities[a, 2], ]
+		result[row, 3:numCols] <- colMeans(tmp[, 3:numCols])
+		row = row+1
+
+	}
+}
+
+write.table(result, "data_set_with_the_averages.txt")
